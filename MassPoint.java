@@ -5,6 +5,8 @@ public class MassPoint {
     Vector2D velocity; // vx, vy
     Vector2D force; // fx, fy (force accumulator)
 
+    boolean isFixed = false;
+
     /**
      * whether the mass point is inside another object
      * (or was inside another object in the previous frame)
@@ -38,31 +40,45 @@ public class MassPoint {
     }
 
     public Point2D getPosition() {
-        return position; // not safe, sacrifice for performance
+        return isFixed ? new Point2D(position) : position; // not safe, sacrifice for performance
     }
 
-    public Double getPositionX() {
+    public double getPositionX() {
         return position.getX();
     }
 
-    public Double getPositionY() {
+    public double getPositionY() {
         return position.getY();
     }
 
     public void addPosition(double x, double y) {
+
+        if (isFixed) {
+            return;
+        }
+
         this.position.addX(x);
         this.position.addY(y);
     }
 
     public void setPosition(Point2D position) {
+        if (isFixed) {
+            return;
+        }
         this.position = position;
     }
 
     public void setPosition(double x, double y) {
+        if (isFixed) {
+            return;
+        }
         this.position.setLocation(x, y);
     }
 
     public void setPositionX(Double x) {
+        if (isFixed) {
+            return;
+        }
         this.position.setX(x);
     }
 
@@ -71,7 +87,7 @@ public class MassPoint {
     }
 
     public Vector2D getVelocity() {
-        return velocity;
+        return isFixed ? new Vector2D(velocity) : velocity;
     }
 
     public Double getVelocityX() {
@@ -83,23 +99,35 @@ public class MassPoint {
     }
 
     public void setVelocity(Vector2D velocity) {
+        if (isFixed) {
+            return;
+        }
         this.velocity = velocity;
     }
 
     public void setVelocity(double vx, double vy) {
+        if (isFixed) {
+            return;
+        }
         this.velocity.set(vx, vy);
     }
 
     public void setVelocityX(Double vx) {
+        if (isFixed) {
+            return;
+        }
         this.velocity.setX(vx);
     }
 
     public void setVelocityY(Double vy) {
+        if (isFixed) {
+            return;
+        }
         this.velocity.setY(vy);
     }
 
     public Vector2D getForce() {
-        return force;
+        return isFixed ? new Vector2D(force) : force;
     }
 
     public Double getForceX() {
@@ -111,46 +139,79 @@ public class MassPoint {
     }
 
     public void setForce(Vector2D force) {
+        if (isFixed) {
+            return;
+        }
         this.force = force;
     }
 
     public void setForce(double fx, double fy) {
+        if (isFixed) {
+            return;
+        }
         this.force.set(fx, fy);
     }
 
     public void setForceX(double fx) {
+        if (isFixed) {
+            return;
+        }
         this.force.setX(fx);
     }
 
     public void setForceY(double fy) {
+        if (isFixed) {
+            return;
+        }
         this.force.setY(fy);
     }
 
     public void addForce(Vector2D force) {
+        if (isFixed) {
+            return;
+        }
         this.force.add(force);
     }
 
     public void addForce(double fx, double fy) {
+        if (isFixed) {
+            return;
+        }
         this.force.add(fx, fy);
     }
 
     public void addForceX(double fx) {
+        if (isFixed) {
+            return;
+        }
         this.force.addX(fx);
     }
 
     public void addForceY(double fy) {
+        if (isFixed) {
+            return;
+        }
         this.force.addY(fy);
     }
 
     public void subtractForce(Vector2D force) {
+        if (isFixed) {
+            return;
+        }
         this.force.subtract(force);
     }
 
     public void subtractForceX(double fx) {
+        if (isFixed) {
+            return;
+        }
         this.force.subtractX(fx);
     }
 
     public void subtractForceY(double fy) {
+        if (isFixed) {
+            return;
+        }
         this.force.subtractY(fy);
     }
 }
